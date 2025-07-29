@@ -1,6 +1,6 @@
-import React from 'react'
-import pic from"../../public/photo.avif";
-import vishal from "../../public/vishal1.jpeg"
+import React,{useState,useEffect} from 'react'
+import photo from"../../public/photo.avif";
+import vishal1 from "../../public/vishal1.jpeg"
 import { FaFacebook } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { AiFillYoutube } from "react-icons/ai";
@@ -10,11 +10,23 @@ import { SiExpress } from "react-icons/si";
 import { FaReact } from "react-icons/fa";
 import { FaNodeJs } from "react-icons/fa";
 import { ReactTyped,Typed } from "react-typed";
-import photo from "../../public/Vishal.jpeg"
+import phot from "../../public/Vishal.jpeg";
+
 
 
 
 const Home = () => {
+
+const [currentPhoto, setCurrentPhoto] = useState(vishal1);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentPhoto(prev => (prev === vishal1 ? photo : vishal1));
+    },1000); // change every 4 seconds
+
+    return () => clearInterval(interval); // clean up on unmount
+  }, []);
+w
   return (
     <>
     <div name="Home" className='max-w-screen-2xl   container mx-auto px-4 md:px-20 my-20'>
@@ -41,8 +53,8 @@ const Home = () => {
  </p>
          <br/>
          {/* social media icons */}
-         <div className='flex flex-col items-center md:flex-row justify-between space-y-6 md:space-y-0'>
-         <div className='space-y-2 '>
+         <div className='grid grid-cols-2 items-center md:flex-row justify-between space-y-6 md:space-y-0'>
+         <div className='space-y-2  '>
             <h1 className='font-bold  '>Available On</h1>
             <ul className='flex space-x-5'>
             <li> <a href="https://www.facebook.com/"target='_blank'><FaFacebook className='text-2xl cursor-pointer'/></a></li>
@@ -61,14 +73,25 @@ const Home = () => {
             <li>{" "} <FaReact className='text-2xl cursor-pointer md:text-3xl  hover:scale-110 duration-200 rounded-full border-[2px]'/></li>
             <li>{" "} <FaNodeJs className='text-2xl cursor-pointer md:text-3xl  hover:scale-110 duration-200 rounded-full border-[2px]'/></li>
             </ul>
-
-
            </div>
+           <div className=' flex flex-col mt-5 '>
+
+            <h1 className='font-bold'>Download Resume:</h1>
+                   <a
+        href="/UpdatedResume.pdf"
+        download
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block items-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-medium py-2 px-4 rounded-lg shadow-md hover:scale-105 hover:shadow-lg transition-all duration-300"
+           >
+         Resume
+         </a>
+         </div>
 
         </div>
         </div>
         <div className='md:w-1/2 md:mt-20 md:ml-48 mt-8 order-1'>
-           <img src={vishal} className='rounded-full md:w-[450px] h-[450px] ' alt="" />
+           <img src={currentPhoto} className='rounded-full md:w-[450px] h-[450px] ' alt="" />
         </div>
         </div>
     </div>
