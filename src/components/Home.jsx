@@ -26,7 +26,7 @@ const [currentPhoto, setCurrentPhoto] = useState(vishal1);
 
     return () => clearInterval(interval); // clean up on unmount
   }, []);
-w
+
   return (
     <>
     <div name="Home" className='max-w-screen-2xl   container mx-auto px-4 md:px-20 my-20'>
